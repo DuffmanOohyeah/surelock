@@ -1,13 +1,18 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import { JSX } from 'react';
+import { Html, Head, Main, NextScript } from 'next/document';
+import Navigation from '@/components/navigation';
 
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
-      <body className="antialiased">
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
-}
+const Document = (): JSX.Element => {
+	return (
+		<Html lang='en'>
+			<Head />
+			<body className='antialiased'>
+				<Navigation />
+				<Main />
+				<NextScript />
+			</body>
+		</Html>
+	);
+};
+
+export default Document;
