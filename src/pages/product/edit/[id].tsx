@@ -3,6 +3,7 @@ import { NextRouter, useRouter } from 'next/router';
 import { UpdateProps, update } from '../../api/update';
 import { GetProps, get } from '../../api/get';
 import moment from 'moment';
+import ImgGallery from '../../../components/imgGallery';
 
 const Edit = (): JSX.Element => {
 	const router: NextRouter = useRouter();
@@ -13,6 +14,7 @@ const Edit = (): JSX.Element => {
 	const [isActive, setIsActive] = useState<boolean>(true);
 	const [dateCreated, setDateCreated] = useState<string>('');
 	const [dateUpdated, setDateUpdated] = useState<string>('');
+	const [imageUrls, setImageUrls] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(true);
 	const [apiObj, setApiObj] = useState<UpdateProps>({
 		success: false,
@@ -30,6 +32,7 @@ const Edit = (): JSX.Element => {
 					is_active: _is_active,
 					created_at: _created_at,
 					updated_at: _updated_at,
+					image_urls: _imageUrls,
 				} = gp[0];
 				setName(_name);
 				setPrice(_price);
@@ -37,6 +40,7 @@ const Edit = (): JSX.Element => {
 				setIsActive(_is_active);
 				setDateCreated(_created_at);
 				setDateUpdated(_updated_at);
+				setImageUrls(_imageUrls.toString());
 				setLoading(false);
 			}
 		};
@@ -44,10 +48,21 @@ const Edit = (): JSX.Element => {
 	}, [_id]);
 
 	return (
-		<div className='m-auto max-w-lg pt-10'>
+		<div className='m-auto max-w-[90%] min-w-[50%] w-[70%] pt-10'>
 			<h1 className='font-bold pb-5 text-center'>
 				Edit Product (ID: {_id})
 			</h1>
+
+			{apiObj.success && (
+				<div
+					className={`pb-5 text-center ${
+						apiObj.success ? 'text-green-700' : 'text-red-700'
+					}`}
+				>
+					{apiObj.message}
+				</div>
+			)}
+
 			{loading ? (
 				<>Loading product ...</>
 			) : (
@@ -96,6 +111,29 @@ const Edit = (): JSX.Element => {
 							<option value={'true'}>True</option>
 							<option value={'false'}>False</option>
 						</select>
+						<label
+							htmlFor='image_urls'
+							className='align-top h-full'
+						>
+							Image Urls:
+							<br />
+							(strings; comma separated)
+							<br />
+							{imageUrls.length > 0 && (
+								<ImgGallery {...{ urls: imageUrls }} />
+							)}
+						</label>
+						<textarea
+							id='image_urls'
+							rows={5}
+							cols={200}
+							className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
+							defaultValue={imageUrls}
+							onChange={(evt) => {
+								evt.preventDefault();
+								setImageUrls(evt.target.value);
+							}}
+						/>
 						<span>Date created:</span>
 						<span className='py-2 px-3'>
 							{dateCreated &&
@@ -119,7 +157,8 @@ const Edit = (): JSX.Element => {
 										name,
 										price,
 										quantity,
-										isActive
+										isActive,
+										imageUrls
 									);
 									setApiObj(data);
 								}}
@@ -135,16 +174,6 @@ const Edit = (): JSX.Element => {
 						</div>
 					</form>
 				</>
-			)}
-
-			{apiObj.success && (
-				<div
-					className={`pt-5 text-center ${
-						apiObj.success ? 'text-green-700' : 'text-red-700'
-					}`}
-				>
-					{apiObj.message}
-				</div>
 			)}
 		</div>
 	);

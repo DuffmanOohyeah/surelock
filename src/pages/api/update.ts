@@ -10,7 +10,7 @@ interface DataProps {
 	name: string;
 	price: number;
 	quantity: number;
-	image_urls?: string[];
+	image_urls: string[];
 	is_active: boolean;
 }
 
@@ -19,13 +19,16 @@ const update = async (
 	name = '',
 	price = 0,
 	quantity = 0,
-	is_active = true
+	is_active = true,
+	image_urls: string
 ): Promise<UpdateProps> => {
 	let rtnObj = {
 		success: false,
 		message: 'Product update was unsuccessful.',
 	};
 	const { apiKey, apiUrl } = config;
+
+	const imgArr: string[] = image_urls.replace(/[\r\n]+/gm, '').split(','); // replace cr/lf and convert to array
 
 	/* start: prep vars for api call */
 	const _name = name.trim();
@@ -38,7 +41,7 @@ const update = async (
 		name: _name,
 		price: _price,
 		quantity: _quantity,
-		image_urls: [],
+		image_urls: imgArr,
 		is_active: _is_active,
 	};
 

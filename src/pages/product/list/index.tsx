@@ -23,7 +23,7 @@ const List = (): JSX.Element => {
 	}, [qryName]);
 
 	return (
-		<div className='m-auto w-[50%]'>
+		<div className='m-auto max-w-[90%] min-w-[50%] w-[70%]'>
 			<Search name={qryName} />
 			<h1 className='font-bold pb-5 text-center pt-5'>
 				Product Listing(s)
@@ -67,7 +67,7 @@ const List = (): JSX.Element => {
 													<Link
 														href={`/product/edit/${row.id}`}
 													>
-														[ Edit ]
+														[ View / Edit ]
 													</Link>
 												</div>
 												<div className='w-1/5 flex-1 text-red-500 hover:text-red-300 text-center'>

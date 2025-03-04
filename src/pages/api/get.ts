@@ -30,6 +30,7 @@ const get = async (
 	const _quantity = quantity;
 	const _created_at = created_at.trim();
 	const _updated_at = updated_at.trim();
+
 	/* end: setup/parse incoming vars */
 
 	/* start: build & call API */

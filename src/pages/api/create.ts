@@ -8,14 +8,16 @@ export interface CreateProps {
 interface DataProps {
 	name: string;
 	price: number;
-	image_urls: string[];
+	//image_urls: string[];
+	image_urls: string | string[];
 	quantity: number;
 }
 
 const create = async (
 	name: string,
 	price: number,
-	quantity: number
+	quantity: number,
+	image_urls: string
 ): Promise<CreateProps> => {
 	let rtnObj: CreateProps = {
 		success: false,
@@ -23,11 +25,13 @@ const create = async (
 	};
 	const { apiKey, apiUrl } = config;
 
+	const imgArr: string[] = image_urls.replace(/[\r\n]+/gm, '').split(','); // replace cr/lf and convert to array
+
 	/* start: build & call API */
 	const data: DataProps = {
 		name: name,
 		price: price,
-		image_urls: [],
+		image_urls: imgArr,
 		quantity: quantity,
 	};
 
