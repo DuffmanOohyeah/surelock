@@ -1,13 +1,13 @@
 import { JSX, useState } from 'react';
 import { NextRouter, useRouter } from 'next/router';
 
-const Search = (props: { name: string | undefined }): JSX.Element => {
+const Search = (props: { name?: string }): JSX.Element => {
 	const { name: qryName } = props;
 	const [name, setName] = useState<string>(qryName || '');
 	const router: NextRouter = useRouter();
 
 	return (
-		<div className='m-auto pt-3'>
+		<div className='m-auto pt-3 w-full'>
 			<form className='grid grid-cols-3 items-center p-3 bg-gray-200 rounded text-center'>
 				<label htmlFor='name'>Product name:</label>
 				<input

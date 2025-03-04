@@ -33,6 +33,9 @@ const List = (): JSX.Element => {
 					<>Loading product list...</>
 				) : (
 					<>
+						<div className='pb-3'>
+							{listData.length} product(s) found
+						</div>
 						{listData.length > 0 ? (
 							<>
 								<div className='flex font-bold bg-slate-300'>

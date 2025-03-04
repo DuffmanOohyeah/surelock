@@ -49,7 +49,6 @@ const ImgGallery = ({ urls }: GalleryProps): JSX.Element => {
 					<Button onClick={handleShow} className='text-blue-700'>
 						[ Click to view image gallery ]
 					</Button>
-					{/* ({_imgArr.length} to display)*/}
 					<Modal show={show} onHide={handleClose} className='modal'>
 						<Modal.Header closeButton>
 							<Modal.Title>Image Gallery</Modal.Title>

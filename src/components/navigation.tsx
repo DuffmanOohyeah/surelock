@@ -4,7 +4,7 @@ import Link from 'next/link';
 const Navigation = (): JSX.Element => {
 	return (
 		<nav>
-			<ul className='flex m-auto max-w-lg text-blue-700'>
+			<ul className='flex m-auto min-w-[50%] max-w-[90%] w-fit text-blue-700'>
 				<li className='flex-1 p-3 hover:text-blue-300'>
 					<Link href={'/'}>Home</Link>
 				</li>
