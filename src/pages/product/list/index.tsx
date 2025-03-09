@@ -1,10 +1,11 @@
 import { JSX, useState, useEffect } from 'react';
-import { GetProps, get } from '../../api/get';
-import { confirmDelete } from '../../api/delete';
+import { get } from '@/pages/api/get';
+import { GetProps } from '@/types';
+import { confirmDelete } from '@/pages/api/delete';
 import moment from 'moment';
 import Link from 'next/link';
 import { NextRouter, useRouter } from 'next/router';
-import Search from '../search';
+import Search from '@/pages/product/search';
 
 const List = (): JSX.Element => {
 	const [listData, setListData] = useState<GetProps[]>([]);

@@ -1,9 +1,10 @@
 import { JSX, useEffect, useState } from 'react';
 import { NextRouter, useRouter } from 'next/router';
-import { UpdateProps, update } from '../../api/update';
-import { GetProps, get } from '../../api/get';
+import { update } from '@/pages/api/update';
+import { get } from '@/pages/api/get';
+import { GetProps, ApiReturnProps } from '@/types';
 import moment from 'moment';
-import ImgGallery from '../../../components/imgGallery';
+import ImgGallery from '@/components/imgGallery';
 
 const Edit = (): JSX.Element => {
 	const router: NextRouter = useRouter();
@@ -16,7 +17,7 @@ const Edit = (): JSX.Element => {
 	const [dateUpdated, setDateUpdated] = useState<string>('');
 	const [imageUrls, setImageUrls] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(true);
-	const [apiObj, setApiObj] = useState<UpdateProps>({
+	const [apiObj, setApiObj] = useState<ApiReturnProps>({
 		success: false,
 		message: '',
 	});

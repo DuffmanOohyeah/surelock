@@ -2,6 +2,7 @@ import { JSX, useState } from 'react';
 import ImageGallery, { ReactImageGalleryItem } from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import { Modal, Button } from 'react-bootstrap';
+import { GalleryProps } from '@/types';
 
 /* start: dummy image array */
 /*[
@@ -20,10 +21,6 @@ import { Modal, Button } from 'react-bootstrap';
 		{original: 'https://cdn.shopify.com/s/files/1/1004/2564/products/coachzinc_ac04f347-c62e-49e0-bd67-2bc0d4dff3d7_1024x1024.jpg'}}
 	]*/
 /* end: dummy image array */
-
-interface GalleryProps {
-	urls: string; // img1.jpg,img2.gif, etc.
-}
 
 const ImgGallery = ({ urls }: GalleryProps): JSX.Element => {
 	const imgArr: string[] = urls.replace(/[\r\n]+/gm, '').split(','); // replace cr/lf and convert to array

@@ -1,18 +1,5 @@
-import config from './config';
-
-export interface UpdateProps {
-	success: boolean;
-	message: string;
-}
-
-interface DataProps {
-	id: number;
-	name: string;
-	price: number;
-	quantity: number;
-	image_urls: string[];
-	is_active: boolean;
-}
+import config from '@/pages/api/config';
+import { ApiReturnProps, UpdateDataProps, Verbs } from '@/types';
 
 const update = async (
 	id = 0,
@@ -21,13 +8,12 @@ const update = async (
 	quantity = 0,
 	is_active = true,
 	image_urls: string
-): Promise<UpdateProps> => {
+): Promise<ApiReturnProps> => {
 	let rtnObj = {
 		success: false,
 		message: 'Product update was unsuccessful.',
 	};
 	const { apiKey, apiUrl } = config;
-
 	const imgArr: string[] = image_urls.replace(/[\r\n]+/gm, '').split(','); // replace cr/lf and convert to array
 
 	/* start: prep vars for api call */
@@ -36,7 +22,7 @@ const update = async (
 	const _quantity = quantity;
 	const _is_active = is_active;
 
-	const data: DataProps = {
+	const data: UpdateDataProps = {
 		id: id,
 		name: _name,
 		price: _price,
@@ -46,7 +32,7 @@ const update = async (
 	};
 
 	const response = await fetch(apiUrl, {
-		method: 'PATCH',
+		method: Verbs.Patch,
 		headers: {
 			Authorization: `Bearer ${apiKey}`,
 			'Content-Type': 'application/json',

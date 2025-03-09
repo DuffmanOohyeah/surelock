@@ -1,34 +1,21 @@
-import config from './config';
-
-export interface CreateProps {
-	success?: boolean;
-	message?: string;
-}
-
-interface DataProps {
-	name: string;
-	price: number;
-	//image_urls: string[];
-	image_urls: string | string[];
-	quantity: number;
-}
+import config from '@/pages/api/config';
+import { ApiReturnProps, ApiDataProps, Verbs } from '@/types';
 
 const create = async (
 	name: string,
 	price: number,
 	quantity: number,
 	image_urls: string
-): Promise<CreateProps> => {
-	let rtnObj: CreateProps = {
+): Promise<ApiReturnProps> => {
+	let rtnObj: ApiReturnProps = {
 		success: false,
 		message: 'There was an error creating a new product.',
 	};
 	const { apiKey, apiUrl } = config;
-
 	const imgArr: string[] = image_urls.replace(/[\r\n]+/gm, '').split(','); // replace cr/lf and convert to array
 
 	/* start: build & call API */
-	const data: DataProps = {
+	const data: ApiDataProps = {
 		name: name,
 		price: price,
 		image_urls: imgArr,
@@ -36,7 +23,7 @@ const create = async (
 	};
 
 	const response = await fetch(apiUrl, {
-		method: 'POST',
+		method: Verbs.Post,
 		headers: {
 			Authorization: `Bearer ${apiKey}`,
 			'Content-Type': 'application/json',

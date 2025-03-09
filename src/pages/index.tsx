@@ -1,5 +1,5 @@
 import { JSX } from 'react';
-import Search from './product/search/index';
+import Search from '@/pages/product/search';
 
 const Home = (): JSX.Element => {
 	return (

@@ -1,12 +1,16 @@
 import { JSX, useState } from 'react';
-import { create, CreateProps } from '../../api/create';
+import { create } from '@/pages/api/create';
+import { ApiReturnProps } from '@/types';
 
 const Create = (): JSX.Element => {
 	const [name, setName] = useState<string>('');
 	const [price, setPrice] = useState<number>(0.99);
 	const [quantity, setQuantity] = useState<number>(1);
 	const [imageUrls, setImageUrls] = useState<string>('');
-	const [apiObj, setApiObj] = useState<CreateProps>({});
+	const [apiObj, setApiObj] = useState<ApiReturnProps>({
+		success: false,
+		message: '',
+	});
 
 	return (
 		<div className='m-auto max-w-[90%] min-w-[50%] w-[70%] pt-10'>

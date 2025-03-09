@@ -1,6 +1,7 @@
-import config from './config';
+import config from '@/pages/api/config';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { Verbs } from '@/types';
 
 const confirmDelete = (id: number): void => {
 	confirmAlert({
@@ -27,7 +28,7 @@ const softDelete = async (id: number): Promise<boolean> => {
 
 	/* start: prep api vars, path for deletion */
 	const response: Response = await fetch(apiUrl, {
-		method: 'DELETE',
+		method: Verbs.Delete,
 		headers: {
 			Authorization: `Bearer ${apiKey}`,
 			'Content-Type': 'application/json',

@@ -1,15 +1,5 @@
-import config from './config';
-
-export interface GetProps {
-	id: number;
-	name: string;
-	price: number;
-	image_urls: string[];
-	quantity: number;
-	is_active: boolean;
-	created_at: string;
-	updated_at: string;
-}
+import config from '@/pages/api/config';
+import { GetProps, Verbs } from '@/types';
 
 const get = async (
 	id = 0,
@@ -44,7 +34,7 @@ const get = async (
 	url += `is_active=${is_active}`;
 
 	const response: Response = await fetch(url, {
-		method: 'GET',
+		method: Verbs.Get,
 		headers: {
 			Authorization: `Bearer ${apiKey}`,
 		},
